@@ -38,6 +38,7 @@
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
 
+#include <std_msgs/Empty.h>
 #include <sensor_msgs/Image.h>
 
 #include <dynamic_reconfigure/server.h>
@@ -128,6 +129,9 @@ private:
   image_transport::CameraPublisher pub_depth_raw_;
   image_transport::CameraPublisher pub_ir_;
   ros::Publisher pub_projector_info_;
+
+  std_msgs::Empty watchdog_msg;
+  ros::Publisher camera_watchdog_pub_;
 
   /** \brief Camera info manager objects. */
   boost::shared_ptr<camera_info_manager::CameraInfoManager> color_info_manager_, ir_info_manager_;

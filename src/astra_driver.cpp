@@ -36,7 +36,7 @@
 #include <unistd.h>  
 #include <stdlib.h>  
 #include <stdio.h>  
-#include <sys/shm.h>  
+#include <sys/shm.h>
 #include <sensor_msgs/image_encodings.h>
 #include <sensor_msgs/distortion_models.h>
 
@@ -163,6 +163,7 @@ void AstraDriver::advertiseROSTopics()
 
   // Asus Xtion PRO does not have an RGB camera
   //ROS_WARN("-------------has color sensor is %d----------- ", device_->hasColorSensor());
+  camera_watchdog_pub_ = nh_.advertise<std_msgs::Empty>("/astra_camera/watchdog", 1);
   if (device_->hasColorSensor())
   {
     image_transport::SubscriberStatusCallback itssc = boost::bind(&AstraDriver::colorConnectCb, this);
@@ -544,6 +545,7 @@ void AstraDriver::newDepthFrameCallback(sensor_msgs::ImagePtr image)
         sensor_msgs::ImageConstPtr floating_point_image = rawToFloatingPointConversion(image);
         pub_depth_.publish(floating_point_image, cam_info);
       }
+      camera_watchdog_pub_.publish(watchdog_msg);
     }
   }
 }
