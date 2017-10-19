@@ -28,7 +28,7 @@ ExternalProject_Add(astra_openni2
   BINARY_DIR ${OPENNI2_SOURCE_LOCATION}
   BUILD_COMMAND make release FILTER=${obfilter}
   INSTALL_DIR openni2
-  INSTALL_COMMAND tar -xjf <BINARY_DIR>/Packaging/Final/OpenNI-Linux-2.3.tar.bz2 -C <INSTALL_DIR> --strip 1 && mkdir -p <INSTALL_DIR>/include && ln -fs <INSTALL_DIR>/Include <INSTALL_DIR>/include/openni2
+  INSTALL_COMMAND tar -xjf <SOURCE_DIR>/Packaging/Final/OpenNI-Linux-2.3.tar.bz2 -C <INSTALL_DIR> --strip 1 && mkdir -p <INSTALL_DIR>/include && ln -fs <INSTALL_DIR>/Include <INSTALL_DIR>/include/openni2
 )
 
 generate_dynamic_reconfigure_options(cfg/Astra.cfg)
