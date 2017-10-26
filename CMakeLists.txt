@@ -15,14 +15,17 @@ endif()
 
 include(ExternalProject)
 
+set(OPENNI2_SOURCE_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../astra_openni2)
+
 ExternalProject_Add(astra_openni2
-  PREFIX astra_openni2
+  SOURCE_DIR ${OPENNI2_SOURCE_LOCATION}
   # SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/astra_openni2/OpenNI2
-  GIT_REPOSITORY https://github.com/orbbec/OpenNI2.git
-  GIT_TAG orbbec_ros
+  #GIT_REPOSITORY https://github.com/orbbec/OpenNI2.git
+  #GIT_TAG orbbec_ros
   CONFIGURE_COMMAND echo "no need to configure"
   #${CMAKE_CURRENT_SOURCE_DIR}/libantlr/configure --prefix=<INSTALL_DIR>
-  BUILD_IN_SOURCE 1
+  #BUILD_IN_SOURCE 1
+  BINARY_DIR ${OPENNI2_SOURCE_LOCATION}
   BUILD_COMMAND make release FILTER=${obfilter}
   INSTALL_DIR openni2
   INSTALL_COMMAND tar -xjf <SOURCE_DIR>/Packaging/Final/OpenNI-Linux-2.3.tar.bz2 -C <INSTALL_DIR> --strip 1 && mkdir -p <INSTALL_DIR>/include && ln -fs <INSTALL_DIR>/Include <INSTALL_DIR>/include/openni2
